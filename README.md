@@ -75,4 +75,4 @@ The HTML report highlights segments that need manual review, including:
 
 ## Author
 
-Rahul Shendre - [GitHub](https://github.com/rahulshendre) - [LinkedIn](https://linkedin.com/in/rahulshendre)
+Rahul Shendre - [GitHub](https://github.com/rahulshendre) - [LinkedIn](https://www.linkedin.com/in/rahul-shendre/)
