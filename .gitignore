@@ -1,8 +1,6 @@
 venv/
-frames/
 *.mp4
 report.html
-subtitle_crop.png
 __pycache__/
 *.pyc
 .DS_Store
