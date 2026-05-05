@@ -14,12 +14,12 @@ def normalize(text):
     return re.sub(r'\s+', ' ', text).strip()
 
 
-video = cv2.VideoCapture("test_vid_kan.mp4")
+video = cv2.VideoCapture("test_vid_kan_2.mp4")
 fps = video.get(cv2.CAP_PROP_FPS)
 
 print("Transcribing audio...")
 model = whisper.load_model("medium")
-result = model.transcribe("test_vid_kan.mp4", language="kn")
+result = model.transcribe("test_vid_kan_2.mp4", language="kn")
 segments = [s for s in result["segments"] if (s["end"] - s["start"]) >= 0.7]
 print(f"Found {len(segments)} segments\n")
 

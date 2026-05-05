@@ -1,7 +1,7 @@
 import cv2 
 import pytesseract
 
-video = cv2.VideoCapture("test_vid_kan.mp4")
+video = cv2.VideoCapture("test_vid_kan_2.mp4")
 fps = video.get(cv2.CAP_PROP_FPS)
 print(f"video FPS : {fps}")
 
