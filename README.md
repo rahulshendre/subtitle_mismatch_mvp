@@ -15,6 +15,17 @@ Built as a prototype for [PlanetRead](https://planetread.org) C4GT DMP 2026.
 3. Reads subtitle text with Tesseract OCR (Hindi)
 4. Compares both texts with RapidFuzz and flags mismatches
 
+## Language support
+
+Check other languages by switching branches.
+
+- Hindi: best supported right now.
+- Kannada: supported, but ASR is noisy and mismatch scores are less stable.
+- Marathi: supported, but early segments misread and OCR alignment is drifting 
+
+Work in progress...
+
+
 ## Screenshots
 
 ### Subtitle region crop
