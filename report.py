@@ -14,12 +14,12 @@ def normalize(text):
     return re.sub(r'\s+', ' ', text).strip()
 
 
-video = cv2.VideoCapture("test_vid.mp4")
+video = cv2.VideoCapture("test_vid_marathi.mp4")
 fps = video.get(cv2.CAP_PROP_FPS)
 
 print("Transcribing audio...")
 model = whisper.load_model("small")
-result = model.transcribe("test_vid.mp4", language="hi", temperature=0)
+result = model.transcribe("test_vid_marathi.mp4", language="mr")
 segments = [s for s in result["segments"] if (s["end"] - s["start"]) >= 1.5]
 print(f"Found {len(segments)} segments\n")
 
@@ -45,9 +45,9 @@ for i, seg in enumerate(segments):
 
     gray = cv2.cvtColor(subtitle_region, cv2.COLOR_BGR2GRAY)
     _, thresh = cv2.threshold(gray, 150, 255, cv2.THRESH_BINARY)
-    ocr_text = pytesseract.image_to_string(thresh, lang='hin').strip()
+    ocr_text = pytesseract.image_to_string(thresh, lang='mar').strip()
     score = fuzz.token_set_ratio(normalize(audio_text), normalize(ocr_text)) / 100
-    status = "OK" if score >= 0.6 else "REVIEW"
+    status = "OK" if score >= 0.5 else "REVIEW"
 
     results.append({
         "start": start,

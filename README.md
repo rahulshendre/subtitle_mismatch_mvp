@@ -4,15 +4,15 @@ Detects mismatches between spoken audio and burned-in subtitles in video files.
 
 Built as a prototype for [PlanetRead](https://planetread.org) C4GT DMP 2026.
 
-## Video used 
+## Video used
 
-[![Video used](https://img.youtube.com/vi/PmM5Fy3RLkc/0.jpg)](https://www.youtube.com/watch?v=PmM5Fy3RLkc)
+[![Video used](https://img.youtube.com/vi/NAVCK3VWzV0/0.jpg)](https://www.youtube.com/watch?v=NAVCK3VWzV0&t=4s)
 
 ## Pipeline
 
 1. Transcribes audio with Whisper
 2. Captures subtitle region from video frames with OpenCV
-3. Reads subtitle text with Tesseract OCR (Hindi)
+3. Reads subtitle text with Tesseract OCR (Marathi)
 4. Compares both texts with RapidFuzz and flags mismatches
 
 ## Screenshots
@@ -31,7 +31,7 @@ Built as a prototype for [PlanetRead](https://planetread.org) C4GT DMP 2026.
 
 ## Setup
 
-You need **Python 3.9+** and **Tesseract OCR** with **Hindi** language data (`hin`).
+You need **Python 3.9+** and **Tesseract OCR** with **Marathi** language data (`mar`).
 
 ### Tesseract — macOS
 
@@ -41,7 +41,7 @@ brew install tesseract tesseract-lang
 
 ### Tesseract — Windows
 
-Install from [UB Mannheim](https://github.com/UB-Mannheim/tesseract/wiki) or run `winget install --id UB-Mannheim.TesseractOCR`. Enable Hindi during install and keep Tesseract on your PATH.
+Install from [UB Mannheim](https://github.com/UB-Mannheim/tesseract/wiki) or run `winget install --id UB-Mannheim.TesseractOCR`. Enable Marathi during install and keep Tesseract on your PATH.
 
 ### Python dependencies
 
