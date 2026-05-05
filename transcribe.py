@@ -1,7 +1,7 @@
 import whisper
 
-model = whisper.load_model("small")
-result = model.transcribe("test_vid.mp4", language = "hi")
+model = whisper.load_model("medium")
+result = model.transcribe("test_vid_kan_2.mp4", language="kn")
 
 
 for segment in result["segments"]:
