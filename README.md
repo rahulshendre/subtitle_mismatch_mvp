@@ -4,13 +4,17 @@ Detects mismatches between spoken audio and burned-in subtitles in video files.
 
 Built as a prototype for [PlanetRead](https://planetread.org) C4GT DMP 2026.
 
-## Video used 
+## Video used
 
-[![Video used](https://img.youtube.com/vi/PmM5Fy3RLkc/0.jpg)](https://www.youtube.com/watch?v=PmM5Fy3RLkc)
+[![Video used](https://img.youtube.com/vi/PmM5Fy3RLkc/hqdefault.jpg)](https://www.youtube.com/watch?v=PmM5Fy3RLkc)
+
+[![YouTube — source clip](https://img.shields.io/badge/YouTube-Play-FF0000?style=flat-square&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=PmM5Fy3RLkc)
 
 ## Demo video
 
-[![Demo video](assets/report.png)](https://youtu.be/G06-LdzV9PU)
+[![Demo video](https://img.youtube.com/vi/G06-LdzV9PU/hqdefault.jpg)](https://youtu.be/G06-LdzV9PU)
+
+[![YouTube — demo](https://img.shields.io/badge/YouTube-Play-FF0000?style=flat-square&logo=youtube&logoColor=white)](https://youtu.be/G06-LdzV9PU)
 
 ## Pipeline
 
