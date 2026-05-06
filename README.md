@@ -8,6 +8,10 @@ Built as a prototype for [PlanetRead](https://planetread.org) C4GT DMP 2026.
 
 [![Video used](https://img.youtube.com/vi/PmM5Fy3RLkc/0.jpg)](https://www.youtube.com/watch?v=PmM5Fy3RLkc)
 
+## Demo video
+
+[![Demo video](assets/report.png)](https://youtu.be/G06-LdzV9PU)
+
 ## Pipeline
 
 1. Transcribes audio with Whisper
