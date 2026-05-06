@@ -3,8 +3,9 @@ import whisper
 import cv2
 import pytesseract
 import re
-from rapidfuzz import fuzz
+import json
 import os
+from rapidfuzz import fuzz
 
 os.makedirs("frames", exist_ok=True)
 
@@ -17,10 +18,19 @@ def normalize(text):
 video = cv2.VideoCapture("test_vid.mp4")
 fps = video.get(cv2.CAP_PROP_FPS)
 
-print("Transcribing audio...")
-model = whisper.load_model("small")
-result = model.transcribe("test_vid.mp4", language="hi", temperature=0)
-segments = [s for s in result["segments"] if (s["end"] - s["start"]) >= 1.5]
+if os.path.exists("segments.json"):
+    with open("segments.json", "r", encoding="utf-8") as f:
+        all_segments = json.load(f)
+    print("Loaded segments from segments.json")
+else:
+    print("Transcribing audio...")
+    model = whisper.load_model("small")
+    result = model.transcribe("test_vid.mp4", language="hi", temperature=0)
+    all_segments = result["segments"]
+    with open("segments.json", "w", encoding="utf-8") as f:
+        json.dump(all_segments, f, ensure_ascii=False, indent=2)
+
+segments = [s for s in all_segments if (s["end"] - s["start"]) >= 1.5]
 print(f"Found {len(segments)} segments\n")
 
 results = []
