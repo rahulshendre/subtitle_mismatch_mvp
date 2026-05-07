@@ -5,7 +5,7 @@ video = cv2.VideoCapture("test_vid.mp4")
 fps = video.get(cv2.CAP_PROP_FPS)
 print(f"video FPS : {fps}")
 
-#taking midpoint for the first one, as middle is the best position to check
+#taking midpoint for the first one, as middle is the best position to check 
 timestamp = 8.0
 frame_number = int(timestamp * fps)
 video.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
