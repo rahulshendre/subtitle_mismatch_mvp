@@ -65,7 +65,7 @@ for i, seg in enumerate(segments):
 
     # token_set_ratio handles word-order drift and also partial OCR matches better than simple ratio
     score = fuzz.token_set_ratio(normalize(audio_text), normalize(ocr_text)) / 100
-    status = "OK" if score >= 0.5 else "REVIEW"
+    status = "OK" if score >= 0.6 else "REVIEW"
 
     results.append({
         "start": start,
