@@ -1,0 +1,492 @@
+[
+  {
+    "timestamp": "0:00:00",
+    "seconds": 0,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:00:10",
+    "seconds": 10,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:00:20",
+    "seconds": 20,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:00:30",
+    "seconds": 30,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:00:40",
+    "seconds": 40,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:00:50",
+    "seconds": 50,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:01:00",
+    "seconds": 60,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:01:10",
+    "seconds": 70,
+    "text": "सचिन पाचाल नवीन अय्यर",
+    "avg_conf": 0.46,
+    "words_detected": 1
+  },
+  {
+    "timestamp": "0:01:20",
+    "seconds": 80,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:01:30",
+    "seconds": 90,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:01:40",
+    "seconds": 100,
+    "text": "00",
+    "avg_conf": 0.83,
+    "words_detected": 1
+  },
+  {
+    "timestamp": "0:01:50",
+    "seconds": 110,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:02:00",
+    "seconds": 120,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:02:10",
+    "seconds": 130,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:02:20",
+    "seconds": 140,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:02:30",
+    "seconds": 150,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:02:40",
+    "seconds": 160,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:02:50",
+    "seconds": 170,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:03:00",
+    "seconds": 180,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:03:10",
+    "seconds": 190,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:03:20",
+    "seconds": 200,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:03:30",
+    "seconds": 210,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:03:40",
+    "seconds": 220,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:03:50",
+    "seconds": 230,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:04:00",
+    "seconds": 240,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:04:10",
+    "seconds": 250,
+    "text": "प्ति चहाचारी",
+    "avg_conf": 0.41,
+    "words_detected": 1
+  },
+  {
+    "timestamp": "0:04:20",
+    "seconds": 260,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:04:30",
+    "seconds": 270,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:04:40",
+    "seconds": 280,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:04:50",
+    "seconds": 290,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:05:00",
+    "seconds": 300,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:05:10",
+    "seconds": 310,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:05:20",
+    "seconds": 320,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:05:30",
+    "seconds": 330,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:05:40",
+    "seconds": 340,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:05:50",
+    "seconds": 350,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:06:00",
+    "seconds": 360,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:06:10",
+    "seconds": 370,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:06:20",
+    "seconds": 380,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:06:30",
+    "seconds": 390,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:06:40",
+    "seconds": 400,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:06:50",
+    "seconds": 410,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:07:00",
+    "seconds": 420,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:07:10",
+    "seconds": 430,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:07:20",
+    "seconds": 440,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:07:30",
+    "seconds": 450,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:07:40",
+    "seconds": 460,
+    "text": "इसके खिलाफ केस की तैयारी की है|",
+    "avg_conf": 0.59,
+    "words_detected": 1
+  },
+  {
+    "timestamp": "0:07:50",
+    "seconds": 470,
+    "text": "ओ सूरज!",
+    "avg_conf": 0.81,
+    "words_detected": 1
+  },
+  {
+    "timestamp": "0:08:00",
+    "seconds": 480,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:08:10",
+    "seconds": 490,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:08:20",
+    "seconds": 500,
+    "text": "वो मान जाऐंगी|",
+    "avg_conf": 0.55,
+    "words_detected": 1
+  },
+  {
+    "timestamp": "0:08:30",
+    "seconds": 510,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:08:40",
+    "seconds": 520,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:08:50",
+    "seconds": 530,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:09:00",
+    "seconds": 540,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:09:10",
+    "seconds": 550,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:09:20",
+    "seconds": 560,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:09:30",
+    "seconds": 570,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:09:40",
+    "seconds": 580,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:09:50",
+    "seconds": 590,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:10:00",
+    "seconds": 600,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:10:10",
+    "seconds": 610,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:10:20",
+    "seconds": 620,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:10:30",
+    "seconds": 630,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:10:40",
+    "seconds": 640,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:10:50",
+    "seconds": 650,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:11:00",
+    "seconds": 660,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:11:10",
+    "seconds": 670,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:11:20",
+    "seconds": 680,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  },
+  {
+    "timestamp": "0:11:30",
+    "seconds": 690,
+    "text": "",
+    "avg_conf": 0,
+    "words_detected": 0
+  }
+]
