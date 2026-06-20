@@ -18,10 +18,12 @@ Built as a prototype for [PlanetRead](https://planetread.org) C4GT DMP 2026.
 
 ## Pipeline
 
-1. Transcribes audio with Whisper
-2. Captures subtitle region from video frames with OpenCV
-3. Reads subtitle text with Tesseract OCR (Hindi)
-4. Compares both texts with RapidFuzz and flags mismatches
+1. Transcribes audio with Whisper (`small` model, Hindi, `temperature=0`)
+2. Filters segments shorter than 1.5s (too short for a readable subtitle; Whisper hallucinates on these)
+3. Seeks to midpoint of each segment (avoids subtitle transition frames) and crops bottom 20% of frame
+4. Reads subtitle text with PaddleOCR (Hindi) — replaced Tesseract for better accuracy on compressed video frames
+5. Compares audio text vs OCR text using RapidFuzz `token_set_ratio` (handles word-order drift and partial matches)
+6. Flags segments below 0.6 similarity as `REVIEW`; above as `OK`
 
 ## Language support
 
@@ -50,17 +52,7 @@ Work in progress...
 
 ## Setup
 
-You need **Python 3.9+** and **Tesseract OCR** with **Hindi** language data (`hin`).
-
-### Tesseract — macOS
-
-```bash
-brew install tesseract tesseract-lang
-```
-
-### Tesseract — Windows
-
-Install from [UB Mannheim](https://github.com/UB-Mannheim/tesseract/wiki) or run `winget install --id UB-Mannheim.TesseractOCR`. Enable Hindi during install and keep Tesseract on your PATH.
+Requires **Python 3.9+**. No system-level OCR engine needed — PaddleOCR bundles its own models.
 
 ### Python dependencies
 
@@ -69,10 +61,12 @@ Install from [UB Mannheim](https://github.com/UB-Mannheim/tesseract/wiki) or run
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-pip install openai-whisper opencv-python pytesseract rapidfuzz
+pip install openai-whisper opencv-python paddlepaddle paddleocr rapidfuzz
 ```
 
-**Windows:** `python -m venv venv`, then `venv\Scripts\activate`, then `pip install openai-whisper opencv-python pytesseract rapidfuzz`.
+**Windows:** `python -m venv venv`, then `venv\Scripts\activate`, then the same `pip install` line above.
+
+> **Note:** First run will download PaddleOCR Hindi model weights (~100 MB). Subsequent runs use the cache.
 
 ## Usage
 

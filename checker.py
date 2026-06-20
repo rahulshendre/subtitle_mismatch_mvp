@@ -1,12 +1,14 @@
 import whisper
 import cv2
-import pytesseract
 import re
 import json
 import os
 from rapidfuzz import fuzz
+from paddleocr import PaddleOCR
 
 os.makedirs("frames", exist_ok=True)
+
+ocr = PaddleOCR(use_angle_cls=True, lang='hi')
 
 
 def normalize(text):
@@ -58,14 +60,13 @@ for i, seg in enumerate(segments):
 
     cv2.imwrite(f"frames/segment_{i+1}_{start:.1f}s.png", subtitle_region)
 
-    # binarize before OCR, improves Devanagari accuracy on compressed video frames
-    gray = cv2.cvtColor(subtitle_region, cv2.COLOR_BGR2GRAY)
-    _, thresh = cv2.threshold(gray, 150, 255, cv2.THRESH_BINARY)
-    ocr_text = pytesseract.image_to_string(thresh, lang='hin').strip()
+    result = ocr.ocr(subtitle_region, cls=True)
+    lines = result[0] if result and result[0] else []
+    ocr_text = ' '.join(line[1][0] for line in lines).strip()
 
     # token_set_ratio handles word-order drift and also partial OCR matches better than simple ratio
     score = fuzz.token_set_ratio(normalize(audio_text), normalize(ocr_text)) / 100
-    status = "OK" if score >= 0.5 else "REVIEW"
+    status = "OK" if score >= 0.6 else "REVIEW"
 
     results.append({
         "start": start,
