@@ -36,7 +36,22 @@ else:
     with open("segments.json", "w", encoding="utf-8") as f:
         json.dump(all_segments, f, ensure_ascii=False, indent=2)
 
-segments = [s for s in all_segments if (s["end"] - s["start"]) >= MIN_SEGMENT_DURATION]
+def dedup_hallucinations(segs, max_repeats=2):
+    counts = {}
+    out = []
+    for s in segs:
+        t = s["text"].strip()
+        counts[t] = counts.get(t, 0) + 1
+        if counts[t] <= max_repeats:
+            out.append(s)
+    return out
+
+raw = [
+    s for s in all_segments
+    if (s["end"] - s["start"]) >= MIN_SEGMENT_DURATION
+    and s.get("no_speech_prob", 0) < 0.6
+]
+segments = dedup_hallucinations(raw)
 print(f"Found {len(segments)} segments\n")
 
 results = []
