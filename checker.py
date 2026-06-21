@@ -1,39 +1,42 @@
 import whisper
 import cv2
-import pytesseract
+import easyocr
 import re
 import json
 import os
 from rapidfuzz import fuzz
 
+VIDEO = "test_dangal_video.mp4"
+WHISPER_MODEL = "medium"
+WHISPER_LANG = "hi"
+MIN_SEGMENT_DURATION = 1.5
+CONF_THRESH = 0.4
+
 os.makedirs("frames", exist_ok=True)
+
+reader = easyocr.Reader(['hi'], gpu=False, verbose=False)
+video = cv2.VideoCapture(VIDEO)
+fps = video.get(cv2.CAP_PROP_FPS)
 
 
 def normalize(text):
-    # remove punctuation and whitespace before we compare
     text = re.sub(r'[^\w\s]', '', text)
     return re.sub(r'\s+', ' ', text).strip()
 
 
-video = cv2.VideoCapture("test_vid.mp4")
-fps = video.get(cv2.CAP_PROP_FPS)
-
-# skip transcription if segments.json is already there, whisper takes almost 1 to 2 min on small model
 if os.path.exists("segments.json"):
     with open("segments.json", "r", encoding="utf-8") as f:
         all_segments = json.load(f)
     print("Loaded segments from segments.json")
 else:
-    print("Transcribing audio...")
-    model = whisper.load_model("small")
-    result = model.transcribe("test_vid.mp4", language="hi", temperature=0)
+    print(f"Transcribing with Whisper {WHISPER_MODEL}...")
+    model = whisper.load_model(WHISPER_MODEL)
+    result = model.transcribe(VIDEO, language=WHISPER_LANG, temperature=0)
     all_segments = result["segments"]
     with open("segments.json", "w", encoding="utf-8") as f:
         json.dump(all_segments, f, ensure_ascii=False, indent=2)
 
-# for this pipeline, drop segments shorter than 1.5s, too short for a readable subtitle and whisper hallucinates on them
-#however, this needs to be solved in the final project
-segments = [s for s in all_segments if (s["end"] - s["start"]) >= 1.5]
+segments = [s for s in all_segments if (s["end"] - s["start"]) >= MIN_SEGMENT_DURATION]
 print(f"Found {len(segments)} segments\n")
 
 results = []
@@ -43,43 +46,64 @@ for i, seg in enumerate(segments):
     end = seg["end"]
     audio_text = seg["text"].strip()
 
-    # midpoint gives the most stable subtitle frame, start and end frame might have transitions
     midpoint = (start + end) / 2
+    frame_no = int(midpoint * fps)
+    video.set(cv2.CAP_PROP_POS_FRAMES, frame_no)
+    ok, frame = video.read()
 
-    frame_number = int(midpoint * fps)
-    video.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
-    success, frame = video.read()
-
-    if not success:
+    if not ok:
         continue
 
-    height = frame.shape[0]
-    subtitle_region = frame[int(height * 0.80):, :]
+    h, w = frame.shape[:2]
 
-    cv2.imwrite(f"frames/segment_{i+1}_{start:.1f}s.png", subtitle_region)
+    detections = reader.readtext(frame)
 
-    # binarize before OCR, improves Devanagari accuracy on compressed video frames
-    gray = cv2.cvtColor(subtitle_region, cv2.COLOR_BGR2GRAY)
-    _, thresh = cv2.threshold(gray, 150, 255, cv2.THRESH_BINARY)
-    ocr_text = pytesseract.image_to_string(thresh, lang='hin').strip()
+    best_text = ""
+    best_score = 0.0
+    best_bbox = None
 
-    # token_set_ratio handles word-order drift and also partial OCR matches better than simple ratio
-    score = fuzz.token_set_ratio(normalize(audio_text), normalize(ocr_text)) / 100
-    status = "OK" if score >= 0.6 else "REVIEW"
+    audio_norm = normalize(audio_text)
+
+    for bbox, text, conf in detections:
+        if conf < CONF_THRESH:
+            continue
+
+        box_w = bbox[1][0] - bbox[0][0]
+        if box_w < 0.2 * w:
+            continue
+
+        score = fuzz.token_set_ratio(audio_norm, normalize(text)) / 100
+
+        if score > best_score:
+            best_score = score
+            best_text = text
+            best_bbox = bbox
+
+    status = "OK" if best_score >= 0.6 else "REVIEW"
+
+    debug_frame = frame.copy()
+    if best_bbox is not None:
+        pts = [(int(p[0]), int(p[1])) for p in best_bbox]
+        cv2.polylines(debug_frame, [__import__('numpy').array(pts)], True, (0, 255, 0), 2)
+    cv2.imwrite(f"frames/segment_{i+1}_{start:.1f}s.png", debug_frame)
 
     results.append({
         "start": start,
         "end": end,
         "audio": audio_text,
-        "subtitle": ocr_text,
-        "score": score,
+        "subtitle": best_text,
+        "score": best_score,
         "status": status
     })
 
     print(f"{start:.1f}s → {end:.1f}s")
     print(f"  Audio   : {audio_text}")
-    print(f"  Subtitle: {ocr_text}")
-    print(f"  Score   : {score:.2f} — {status}\n")
+    print(f"  Subtitle: {best_text}")
+    print(f"  Score   : {best_score:.2f} — {status}\n")
 
 video.release()
-print(f"Done. Frames saved in /frames folder.")
+
+with open("results.json", "w", encoding="utf-8") as f:
+    json.dump(results, f, ensure_ascii=False, indent=2)
+
+print(f"Done. {len(results)} segments. Frames in /frames, results in results.json")

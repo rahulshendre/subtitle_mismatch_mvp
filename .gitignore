@@ -4,3 +4,8 @@ report.html
 __pycache__/
 *.pyc
 .DS_Store
+*.png
+*.json
+ocr_runs/
+result/
+frames/
