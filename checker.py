@@ -61,46 +61,46 @@ for i, seg in enumerate(segments):
     end = seg["end"]
     audio_text = seg["text"].strip()
 
-    midpoint = (start + end) / 2
-    frame_no = int(midpoint * fps)
-    video.set(cv2.CAP_PROP_POS_FRAMES, frame_no)
-    ok, frame = video.read()
-
-    if not ok:
-        continue
-
-    h, w = frame.shape[:2]
-
-    detections = reader.readtext(frame)
+    # sample 3 frames across segment to avoid missing subtitle at edges
+    sample_offsets = [0.25, 0.5, 0.75]
+    sample_times = [start + (end - start) * o for o in sample_offsets]
 
     best_text = ""
     best_score = 0.0
     best_bbox = None
+    best_frame = None
 
     audio_norm = normalize(audio_text)
 
-    for bbox, text, conf in detections:
-        if conf < CONF_THRESH:
+    for t in sample_times:
+        video.set(cv2.CAP_PROP_POS_FRAMES, int(t * fps))
+        ok, frame = video.read()
+        if not ok:
             continue
 
-        box_w = bbox[1][0] - bbox[0][0]
-        if box_w < 0.2 * w:
-            continue
+        h, w = frame.shape[:2]
 
-        score = fuzz.token_set_ratio(audio_norm, normalize(text)) / 100
-
-        if score > best_score:
-            best_score = score
-            best_text = text
-            best_bbox = bbox
+        for bbox, text, conf in reader.readtext(frame):
+            if conf < CONF_THRESH:
+                continue
+            box_w = bbox[1][0] - bbox[0][0]
+            if box_w < 0.2 * w:
+                continue
+            score = fuzz.token_set_ratio(audio_norm, normalize(text)) / 100
+            if score > best_score:
+                best_score = score
+                best_text = text
+                best_bbox = bbox
+                best_frame = frame
 
     status = "OK" if best_score >= 0.6 else "REVIEW"
 
-    debug_frame = frame.copy()
-    if best_bbox is not None:
-        pts = [(int(p[0]), int(p[1])) for p in best_bbox]
-        cv2.polylines(debug_frame, [__import__('numpy').array(pts)], True, (0, 255, 0), 2)
-    cv2.imwrite(f"frames/segment_{i+1}_{start:.1f}s.png", debug_frame)
+    if best_frame is not None:
+        debug_frame = best_frame.copy()
+        if best_bbox is not None:
+            pts = [(int(p[0]), int(p[1])) for p in best_bbox]
+            cv2.polylines(debug_frame, [__import__('numpy').array(pts)], True, (0, 255, 0), 2)
+        cv2.imwrite(f"frames/segment_{i+1}_{start:.1f}s.png", debug_frame)
 
     results.append({
         "start": start,
