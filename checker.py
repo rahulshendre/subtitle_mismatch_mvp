@@ -10,7 +10,10 @@ VIDEO = "test_dangal_video.mp4"
 WHISPER_MODEL = "medium"
 WHISPER_LANG = "hi"
 MIN_SEGMENT_DURATION = 1.5
-CONF_THRESH = 0.4
+# EasyOCR's Devanagari confidence is unreliable (gives ~0.27 to perfect reads,
+# ~0.95 to garbage logo text). Keep this as a loose noise floor only — the fuzzy
+# match score against the Whisper text is the real signal/garbage discriminator.
+CONF_THRESH = 0.1
 
 os.makedirs("frames", exist_ok=True)
 
