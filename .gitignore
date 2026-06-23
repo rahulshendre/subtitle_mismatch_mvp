@@ -9,3 +9,4 @@ __pycache__/
 ocr_runs/
 result/
 frames/
+_dev_font.ttc

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="hi"><head><meta charset="utf-8">
+<title>Mismatch detection — proof</title>
+<style>
+  body { font-family: 'Noto Sans Devanagari', 'Nirmala UI', system-ui, sans-serif; margin: 24px; color:#1a1a1a; }
+  h1 { font-size: 20px; margin-bottom: 4px; }
+  .meta { color:#555; font-size:14px; margin-bottom:16px; }
+  table { border-collapse: collapse; width:100%; font-size:14px; }
+  th,td { border:1px solid #e2e2e2; padding:8px 10px; vertical-align:top; }
+  th { background:#2b3a4a; color:#fff; }
+  td.time { color:#777; white-space:nowrap; }
+  td.audio { background:#fafafa; }
+  td.ok { background:#e7f6ec; }
+  td.flag { background:#ffe1e1; }
+  .s { font-size:12px; color:#555; margin-top:4px; }
+  .badge { padding:1px 7px; border-radius:4px; font-weight:600; font-size:11px; }
+  .badge.ok { background:#cdebd6; color:#1d6b38; }
+  .badge.flag { background:#f6c6c6; color:#a11; }
+</style></head>
+<body>
+  <h1>Mismatch detection — proof</h1>
+  <div class="meta">Same audio. Left = the real burned-in subtitle (matches → OK). Right = a wrong subtitle swapped in → score collapses → <b>FLAGGED</b>. This is the tool catching a mismatch.</div>
+  <table>
+    <thead><tr><th>Time</th><th>Audio (Whisper)</th><th>Real subtitle</th><th>Wrong subtitle (simulated)</th></tr></thead>
+    <tbody><tr><td class='time'>556.4s</td><td class='audio'>यही लोरी काखर सुनाथी थी</td><td class='ok'>तो आप मुझे यही लोरी गाकर<div class='s'>0.62 <span class='badge ok'>OK</span></div></td><td class='flag'>माँ, मैं आपको गले से लगाना चाहती हूँ]<div class='s'>0.46 <span class='badge flag'>FLAGGED</span></div></td></tr><tr><td class='time'>564.4s</td><td class='audio'>माँ, मैं आपको गले से लगाना चाथी हूँ</td><td class='ok'>माँ, मैं आपको गले से लगाना चाहती हूँ]<div class='s'>0.92 <span class='badge ok'>OK</span></div></td><td class='flag'>हमें अपने सीने से लगा लीजिएग<div class='s'>0.58 <span class='badge flag'>FLAGGED</span></div></td></tr><tr><td class='time'>570.4s</td><td class='audio'>माँ, आपने सिने से लगा दीजियो</td><td class='ok'>हमें अपने सीने से लगा लीजिएग<div class='s'>0.78 <span class='badge ok'>OK</span></div></td><td class='flag'>डॉक्टर , क्या हुआ है माँ को?<div class='s'>0.42 <span class='badge flag'>FLAGGED</span></div></td></tr><tr><td class='time'>656.4s</td><td class='audio'>दॉक्टर, यह हूँ है माँ कोख?</td><td class='ok'>डॉक्टर , क्या हुआ है माँ को?<div class='s'>0.73 <span class='badge ok'>OK</span></div></td><td class='flag'>तो आप मुझे यही लोरी गाकर<div class='s'>0.58 <span class='badge flag'>FLAGGED</span></div></td></tr></tbody>
+  </table>
+</body></html>

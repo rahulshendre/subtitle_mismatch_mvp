@@ -35,18 +35,18 @@ def dedup_hallucinations(segs, max_repeats=2):
     return out
 
 
-def load_segments():
-    if os.path.exists("segments.json"):
-        with open("segments.json", "r", encoding="utf-8") as f:
+def load_segments(video_path, cache_path):
+    if os.path.exists(cache_path):
+        with open(cache_path, "r", encoding="utf-8") as f:
             all_segments = json.load(f)
-        print("Loaded shared Whisper segments from segments.json")
+        print(f"Loaded shared Whisper segments from {cache_path}")
     else:
         import whisper
-        print(f"No cache — transcribing once with Whisper {WHISPER_MODEL}...")
+        print(f"No cache — transcribing {video_path} with Whisper {WHISPER_MODEL}...")
         model = whisper.load_model(WHISPER_MODEL)
-        result = model.transcribe(VIDEO, language=WHISPER_LANG, temperature=0)
+        result = model.transcribe(video_path, language=WHISPER_LANG, temperature=0)
         all_segments = result["segments"]
-        with open("segments.json", "w", encoding="utf-8") as f:
+        with open(cache_path, "w", encoding="utf-8") as f:
             json.dump(all_segments, f, ensure_ascii=False, indent=2)
     raw = [
         s for s in all_segments
@@ -122,14 +122,21 @@ def make_detector(engine):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--engine", required=True, choices=["easyocr", "paddle", "tesseract"])
+    ap.add_argument("--video", default=VIDEO)
     args = ap.parse_args()
     engine = args.engine
+    video_path = args.video
 
-    segments = load_segments()
+    is_default = os.path.abspath(video_path) == os.path.abspath(VIDEO)
+    stem = os.path.splitext(os.path.basename(video_path))[0]
+    cache_path = "segments.json" if is_default else f"segments_{stem}.json"
+    out_path = f"results_{engine}.json" if is_default else f"results_{engine}_{stem}.json"
+
+    segments = load_segments(video_path, cache_path)
     print(f"[{engine}] {len(segments)} segments\n")
 
     detect = make_detector(engine)
-    video = cv2.VideoCapture(VIDEO)
+    video = cv2.VideoCapture(video_path)
     fps = video.get(cv2.CAP_PROP_FPS)
 
     results = []
@@ -162,7 +169,6 @@ def main():
 
     video.release()
 
-    out_path = f"results_{engine}.json"
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
 
